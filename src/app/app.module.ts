@@ -5,6 +5,7 @@ import { MyApp } from './app.component';
 
 import { PlayerListPage } from '../pages/player-list/player-list';
 import { PlayerDetailsPage } from '../pages/player-details/player-details';
+import { AddPlayerPage } from '../pages/add-player/add-player';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -13,7 +14,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   declarations: [
     MyApp,
     PlayerListPage,
-    PlayerDetailsPage
+    PlayerDetailsPage,
+    AddPlayerPage
   ],
   imports: [
     BrowserModule,
@@ -23,7 +25,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   entryComponents: [
     MyApp,
     PlayerListPage,
-    PlayerDetailsPage
+    PlayerDetailsPage,
+    AddPlayerPage
   ],
   providers: [
     StatusBar,
