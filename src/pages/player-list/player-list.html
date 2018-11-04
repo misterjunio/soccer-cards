@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Player List</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <h3>List of players</h3>
+
+  <ion-list>
+    <button ion-item *ngFor="let player of players" (click)="playerTapped($event, player)">
+      <ion-icon name="{{player.icon}}" item-left></ion-icon>
+      {{player.name}}
+      <div class="item-note" item-right>
+        {{player.status}}
+      </div>
+    </button>
+  </ion-list>
+
+</ion-content>
