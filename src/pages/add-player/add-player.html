@@ -14,4 +14,11 @@
   <h3 text-center>
     Add new player
   </h3>
+  <form [formGroup]="addPlayerForm" (ngSubmit)="addPlayer()">
+    <ion-item>
+      <ion-label>Name</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+    </ion-item>
+    <button ion-button type="submit" [disabled]="!addPlayerForm.valid">Submit</button>
+  </form>
 </ion-content>
