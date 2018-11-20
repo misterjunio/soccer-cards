@@ -1,9 +1,22 @@
 {
-  "name": "SoccerCards",
+  "name": "soccer-cards",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
-  "private": true,
+  "description": "Soccer cards shared with friends",
+  "keywords": [
+    "soccer",
+    "cards",
+    "ionic"
+  ],
+  "homepage": "https://github.com/misterjunio/soccer-cards#readme",
+  "bugs": {
+    "url": "https://github.com/misterjunio/soccer-cards/issues"
+  },
+  "license": "MIT",
+  "author": "Rui Júnio Silva <ruca.33.maia@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/misterjunio/soccer-cards.git"
+  },
   "scripts": {
     "start": "ionic-app-scripts serve",
     "clean": "ionic-app-scripts clean",
@@ -35,5 +48,5 @@
     "@ionic/app-scripts": "3.2.0",
     "typescript": "~2.6.2"
   },
-  "description": "An Ionic project"
+  "private": true
 }
