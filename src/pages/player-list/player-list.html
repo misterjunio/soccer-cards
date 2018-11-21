@@ -1,26 +1,31 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="secondary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Player List</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openAddPlayerModal()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
-
-<ion-content padding>
-  <h3>List of players</h3>
-
-  <ion-list>
-    <button ion-item *ngFor="let player of players" (click)="playerTapped($event, player)">
-      <ion-icon name="{{player.icon}}" item-left></ion-icon>
-      {{player.name}}
-      <div class="item-note" item-right>
-        {{player.status}}
-      </div>
-    </button>
-  </ion-list>
-
-  <ion-fab right bottom>
-    <button ion-fab color="light" (click)="addPlayer()"><ion-icon name="add"></ion-icon></button>
-  </ion-fab>
+<ion-content class="list-mini-content">
+  <div class="list-mini">
+    <ion-list>
+      <ion-item *ngFor="let player of players" (click)="viewPlayerDetails(player.payload.doc.id, player.payload.doc.data())">
+        <ion-thumbnail item-start>
+          <img [src]="player.payload.doc.data().image">
+        </ion-thumbnail>
+        <h2>{{player.payload.doc.data().name}}</h2>
+        <button ion-button clear item-end>{{player.payload.doc.data().status}}</button>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>
+<ion-footer (click)="logout()">
+  <ion-toolbar color="secondary">
+    <ion-title>Log out</ion-title>
+  </ion-toolbar>
+</ion-footer>

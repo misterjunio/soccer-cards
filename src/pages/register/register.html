@@ -5,15 +5,15 @@
 </ion-header>
 
 <ion-content padding class="form-content">
-  <form class="form" [formGroup]="validations_form"  (ngSubmit)="tryRegister(validations_form.value)">
+  <form class="form" [formGroup]="registerForm" (ngSubmit)="tryRegister(registerForm.value)">
 
     <ion-item>
       <ion-label floating color="primary">Email</ion-label>
       <ion-input type="text" formControlName="email"></ion-input>
     </ion-item>
     <div class="validation-errors">
-      <ng-container *ngFor="let validation of validation_messages.email">
-        <div class="error-message" *ngIf="validations_form.get('email').hasError(validation.type) && (validations_form.get('email').dirty || validations_form.get('email').touched)">
+      <ng-container *ngFor="let validation of validationMessages.email">
+        <div class="error-message" *ngIf="registerForm.get('email').hasError(validation.type) && (registerForm.get('email').dirty || registerForm.get('email').touched)">
           {{ validation.message }}
         </div>
       </ng-container>
@@ -24,14 +24,14 @@
       <ion-input type="password" formControlName="password" class="form-controll" required></ion-input>
     </ion-item>
     <div class="validation-errors">
-      <ng-container *ngFor="let validation of validation_messages.password">
-        <div class="error-message" *ngIf="validations_form.get('password').hasError(validation.type) && (validations_form.get('password').dirty || validations_form.get('password').touched)">
+      <ng-container *ngFor="let validation of validationMessages.password">
+        <div class="error-message" *ngIf="registerForm.get('password').hasError(validation.type) && (registerForm.get('password').dirty || registerForm.get('password').touched)">
           {{ validation.message }}
         </div>
       </ng-container>
     </div>
 
-    <button class="submit-btn" ion-button block type="submit" [disabled]="!validations_form.valid">Register</button>
+    <button class="submit-btn" ion-button block type="submit" [disabled]="!registerForm.valid">Register</button>
     <label class="error-message">{{errorMessage}}</label>
     <label class="success-message">{{successMessage}}</label>
   </form>

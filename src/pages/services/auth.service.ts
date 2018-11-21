@@ -5,7 +5,6 @@ import { FirebaseService } from './firebase.service';
 
 @Injectable()
 export class AuthService {
-
   constructor(
     private firebaseService: FirebaseService
   ){}

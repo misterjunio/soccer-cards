@@ -1,19 +1,38 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="secondary">
     <button menuToggle *ngIf="!selectedPlayer">
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Player Details</ion-title>
+    <ion-title>
+      Update Player
+    </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <h3 text-center *ngIf="selectedPlayer">
-    {{selectedPlayer.name}}
-    <ion-icon [name]="selectedPlayer.icon"></ion-icon>
-  </h3>
-  
-  <h4 text-center *ngIf="selectedPlayer">
-    You navigated here from <b>{{selectedPlayer.name}}</b>
-  </h4>
+<ion-content padding>
+  <div class="user-image-content">
+    <ion-row no-padding class="user-image-row">
+      <ion-col no-padding col-6 offset-3>
+        <img [src]="image" alt="this is the image"/>
+      </ion-col>
+    </ion-row>
+    <ion-row no-padding class="user-image-row">
+      <ion-col no-padding width-60>
+        <button class="image-action-button" ion-button outline block small (click)="openImagePicker()">Change Picture</button>
+      </ion-col>
+    </ion-row>
+  </div>
+  <form class="new-user-form" [formGroup]="updatePlayerForm" (ngSubmit)="updatePlayer(updatePlayerForm.value)">
+    <ion-item>
+      <ion-label floating color="primary">Name</ion-label>
+      <ion-input type="text" formControlName="name" class="form-control" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating color="primary">Status</ion-label>
+      <ion-input type="text" formControlName="status" class="form-control" required></ion-input>
+    </ion-item>
+    <button class="form-action-button" ion-button block type="submit" [disabled]="!updatePlayerForm.valid">Save</button>
+  </form>
+  <button class="form-action-button" ion-button block color="danger" (click)="deletePlayer()">Delete</button>
+
 </ion-content>

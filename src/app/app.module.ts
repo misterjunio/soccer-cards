@@ -1,13 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+
 import { SoccerCardsApp } from './app.component';
 
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
+import { MenuPage } from '../pages/menu/menu';
 import { PlayerListPage } from '../pages/player-list/player-list';
 import { PlayerDetailsPage } from '../pages/player-details/player-details';
-import { AddPlayerPage } from '../pages/add-player/add-player';
+import { NewPlayerModalPage } from '../pages/new-player-modal/new-player-modal';
 
 import { FirebaseService } from '../pages/services/firebase.service';
 import { AuthService } from '../pages/services/auth.service';
@@ -27,9 +29,10 @@ import { environment } from '../environment/environment';
     SoccerCardsApp,
     LoginPage,
     RegisterPage,
+    MenuPage,
     PlayerListPage,
     PlayerDetailsPage,
-    AddPlayerPage
+    NewPlayerModalPage
   ],
   imports: [
     BrowserModule,
@@ -44,9 +47,10 @@ import { environment } from '../environment/environment';
     SoccerCardsApp,
     LoginPage,
     RegisterPage,
+    MenuPage,
     PlayerListPage,
     PlayerDetailsPage,
-    AddPlayerPage
+    NewPlayerModalPage
   ],
   providers: [
     StatusBar,

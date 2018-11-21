@@ -1,44 +1,61 @@
 import { Component } from '@angular/core';
-
-import { NavController, NavParams } from 'ionic-angular';
-
-import { ModalController } from 'ionic-angular';
-
+import { NavController, ModalController } from 'ionic-angular';
+import { AuthService } from '../services/auth.service';
+import { FirebaseService } from '../services/firebase.service';
+import { NewPlayerModalPage } from '../new-player-modal/new-player-modal';
 import { PlayerDetailsPage } from '../player-details/player-details';
-
-import { AddPlayerPage } from '../add-player/add-player';
+import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-player-list',
   templateUrl: 'player-list.html'
 })
-
 export class PlayerListPage {
-  icons: string[];
-  players: Array<{name: string, status:string, icon: string}>;
+  players: Array<any>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
-    this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
-    'american-football', 'boat', 'bluetooth', 'build'];
+  constructor(
+    private navCtrl: NavController,
+    private modalCtrl: ModalController,
+    private authService: AuthService,
+    private firebaseService: FirebaseService
+  ) {}
 
-    this.players = [];
-    for(let i = 1; i < 11; i++) {
-      this.players.push({
-        name: 'Player ' + i,
-        status: 'To do',
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-      });
+  ionViewWillEnter(){
+    this.getData();
+  }
+
+  getData(){
+    this.firebaseService.getFriends()
+    .then(players => {
+      this.players = players;
+    })
+  }
+
+  viewPlayerDetails(id, player){
+    // debugger
+    let data = {
+      name: player.name,
+      status: player.status,
+      image: player.image,
+      id: id
     }
-  }
-
-  playerTapped(event, player) {
     this.navCtrl.push(PlayerDetailsPage, {
-      player: player
-    });
+      data: data
+    })
   }
 
-  addPlayer() {
-    const modal = this.modalCtrl.create(AddPlayerPage);
+  openAddPlayerModal() {
+    const modal = this.modalCtrl.create(NewPlayerModalPage);
+    modal.onDidDismiss(data => {
+      this.getData();
+    });
     modal.present();
+  }
+
+  logout(){
+    this.authService.doLogout()
+    .then(res => {
+      this.navCtrl.push(LoginPage);
+    })
   }
 }

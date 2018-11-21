@@ -6,30 +6,32 @@ import 'firebase/storage';
 
 @Injectable()
 export class FirebaseService {
-
   private snapshotChangesSubscription: any;
-  constructor(public afs: AngularFirestore){}
+  
+  constructor(
+    public afs: AngularFirestore
+  ){}
 
-  getTasks(){
+  getFriends() {
     return new Promise<any>((resolve, reject) => {
       let currentUser = firebase.auth().currentUser;
-      this.snapshotChangesSubscription = this.afs.collection('people').doc(currentUser.uid).collection('tasks').snapshotChanges()
+      this.snapshotChangesSubscription = this.afs.collection('people').doc(currentUser.uid).collection('friends').snapshotChanges()
       .subscribe(snapshots => {
         resolve(snapshots);
       })
     });
   }
 
-  unsubscribeOnLogOut(){
-    //remember to unsubscribe from the snapshotChanges
+  unsubscribeOnLogOut() {
+    // remember to unsubscribe from the snapshotChanges
     // debugger;
     this.snapshotChangesSubscription.unsubscribe();
   }
 
-  updateTask(taskKey, value){
+  updateFriend(playerKey, value) {
     return new Promise<any>((resolve, reject) => {
       let currentUser = firebase.auth().currentUser;
-      this.afs.collection('people').doc(currentUser.uid).collection('tasks').doc(taskKey).set(value)
+      this.afs.collection('people').doc(currentUser.uid).collection('friends').doc(playerKey).set(value)
       .then(
         res => resolve(res),
         err => reject(err)
@@ -37,10 +39,10 @@ export class FirebaseService {
     })
   }
 
-  deleteTask(taskKey){
+  deleteFriend(playerKey) {
     return new Promise<any>((resolve, reject) => {
       let currentUser = firebase.auth().currentUser;
-      this.afs.collection('people').doc(currentUser.uid).collection('tasks').doc(taskKey).delete()
+      this.afs.collection('people').doc(currentUser.uid).collection('friends').doc(playerKey).delete()
       .then(
         res => resolve(res),
         err => reject(err)
@@ -48,12 +50,12 @@ export class FirebaseService {
     })
   }
 
-  createTask(value){
+  createFriend(value) {
     return new Promise<any>((resolve, reject) => {
       let currentUser = firebase.auth().currentUser;
-      this.afs.collection('people').doc(currentUser.uid).collection('tasks').add({
-        title: value.title,
-        description: value.description,
+      this.afs.collection('people').doc(currentUser.uid).collection('friends').add({
+        name: value.name,
+        status: value.status,
         image: value.image
       })
       .then(
@@ -78,11 +80,11 @@ export class FirebaseService {
     img.src = imageUri;
   };
 
-  uploadImage(imageURI, randomId){
+  uploadImage(imageURI, randomId) {
     return new Promise<any>((resolve, reject) => {
       let storageRef = firebase.storage().ref();
       let imageRef = storageRef.child('image').child(randomId);
-      this.encodeImageUri(imageURI, function(image64){
+      this.encodeImageUri(imageURI, function(image64) {
         imageRef.putString(image64, 'data_url')
         .then(snapshot => {
           snapshot.ref.getDownloadURL()
