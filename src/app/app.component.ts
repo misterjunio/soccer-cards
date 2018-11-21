@@ -11,7 +11,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   templateUrl: 'app.html'
 })
 
-export class MyApp {
+export class SoccerCardsApp {
   @ViewChild(Nav) nav: Nav;
 
   // make PlayerListPage the root (or first) page

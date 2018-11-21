@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { MyApp } from './app.component';
+import { SoccerCardsApp } from './app.component';
 
 import { PlayerListPage } from '../pages/player-list/player-list';
 import { PlayerDetailsPage } from '../pages/player-details/player-details';
@@ -12,18 +12,18 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 @NgModule({
   declarations: [
-    MyApp,
+    SoccerCardsApp,
     PlayerListPage,
     PlayerDetailsPage,
     AddPlayerPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(SoccerCardsApp),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
+    SoccerCardsApp,
     PlayerListPage,
     PlayerDetailsPage,
     AddPlayerPage
