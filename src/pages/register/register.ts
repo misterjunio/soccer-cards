@@ -28,7 +28,7 @@ export class RegisterPage {
     private formBuilder: FormBuilder
   ) {}
 
-  ionViewWillLoad(){
+  ionViewWillLoad() {
     this.registerForm = this.formBuilder.group({
       email: new FormControl('', Validators.compose([
         Validators.required,
@@ -41,7 +41,7 @@ export class RegisterPage {
     });
   }
 
-  tryRegister(value){
+  tryRegister(value) {
     this.authService.doRegister(value)
      .then(res => {
        console.log(res);
@@ -54,7 +54,7 @@ export class RegisterPage {
      })
   }
 
-  goLoginPage(){
+  goLoginPage() {
     this.navCtrl.pop();
   }
 }

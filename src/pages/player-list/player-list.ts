@@ -20,18 +20,18 @@ export class PlayerListPage {
     private firebaseService: FirebaseService
   ) {}
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.getData();
   }
 
-  getData(){
+  getData() {
     this.firebaseService.getFriends()
     .then(players => {
       this.players = players;
     })
   }
 
-  viewPlayerDetails(id, player){
+  viewPlayerDetails(id, player) {
     // debugger
     let data = {
       name: player.name,
@@ -52,7 +52,7 @@ export class PlayerListPage {
     modal.present();
   }
 
-  logout(){
+  logout() {
     this.authService.doLogout()
     .then(res => {
       this.navCtrl.push(LoginPage);

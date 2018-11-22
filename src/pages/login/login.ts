@@ -29,7 +29,7 @@ export class LoginPage {
     private formBuilder: FormBuilder
   ) {}
 
-  ionViewWillLoad(){
+  ionViewWillLoad() {
     this.loginForm = this.formBuilder.group({
       email: new FormControl('', Validators.compose([
         Validators.required,
@@ -42,7 +42,7 @@ export class LoginPage {
     });
   }
 
-  tryLogin(value){
+  tryLogin(value) {
     this.authService.doLogin(value)
     .then(res => {
       this.navCtrl.setRoot(MenuPage);
@@ -51,7 +51,7 @@ export class LoginPage {
     })
   }
 
-  goRegisterPage(){
+  goToRegisterPage() {
     this.navCtrl.push(RegisterPage);
   }
 }

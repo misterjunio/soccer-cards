@@ -40,6 +40,7 @@
     "@ionic/pro": "2.0.3",
     "@ionic/storage": "2.2.0",
     "angularfire2": "^5.1.0",
+    "cordova-plugin-ionic": "^5.2.7",
     "cordova-plugin-telerik-imagepicker": "2.2.2",
     "firebase": "^5.5.9",
     "ionic-angular": "3.9.2",

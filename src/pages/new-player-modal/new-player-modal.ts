@@ -43,7 +43,7 @@ export class NewPlayerModalPage {
     this.viewCtrl.dismiss();
   }
 
-  addPlayer(value){
+  addPlayer(value) {
     console.log("Added player " + value.name);
     let data = {
       name: value.name,

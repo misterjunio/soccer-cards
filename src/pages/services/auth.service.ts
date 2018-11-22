@@ -9,7 +9,7 @@ export class AuthService {
     private firebaseService: FirebaseService
   ){}
 
-  doRegister(value){
+  doRegister(value) {
    return new Promise<any>((resolve, reject) => {
      firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
      .then(
@@ -18,7 +18,7 @@ export class AuthService {
    })
   }
 
-  doLogin(value){
+  doLogin(value) {
    return new Promise<any>((resolve, reject) => {
      firebase.auth().signInWithEmailAndPassword(value.email, value.password)
      .then(
@@ -27,9 +27,9 @@ export class AuthService {
    })
   }
 
-  doLogout(){
+  doLogout() {
     return new Promise((resolve, reject) => {
-      if(firebase.auth().currentUser){
+      if(firebase.auth().currentUser) {
         firebase.auth().signOut()
         .then(() => {
           this.firebaseService.unsubscribeOnLogOut();

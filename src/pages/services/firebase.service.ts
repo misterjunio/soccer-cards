@@ -15,7 +15,7 @@ export class FirebaseService {
   getFriends() {
     return new Promise<any>((resolve, reject) => {
       let currentUser = firebase.auth().currentUser;
-      this.snapshotChangesSubscription = this.afs.collection('people').doc(currentUser.uid).collection('friends').snapshotChanges()
+      this.snapshotChangesSubscription = this.afs.collection('people').doc(currentUser.uid).collection('friends', ref => ref.orderBy('name')).snapshotChanges()
       .subscribe(snapshots => {
         resolve(snapshots);
       })
