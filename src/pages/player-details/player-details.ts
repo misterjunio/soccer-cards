@@ -65,7 +65,6 @@ export class PlayerDetailsPage {
 
   getData() {
     this.player = this.navParams.get('data');
-    console.log(this.player);
     this.image = this.player.image;
     this.mainSkillValues = [
       Math.round(this.player.skills.acceleration * 0.45 + this.player.skills.sprintSpeed * 0.55),
