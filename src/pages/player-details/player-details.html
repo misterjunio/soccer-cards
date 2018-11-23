@@ -27,12 +27,21 @@
       <ion-label floating color="primary">Name</ion-label>
       <ion-input type="text" formControlName="name" class="form-control" required></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label floating color="primary">Status</ion-label>
-      <ion-input type="text" formControlName="status" class="form-control" required></ion-input>
-    </ion-item>
+    <ion-card class="skill-card">
+      <ion-card-header>Pace<span class="skill-score">{{mainSkillValues[0]}}</span></ion-card-header>
+      <ion-list>
+        <ion-item>Acceleration<span item-end>{{player.skills.acceleration}}</span></ion-item>
+        <ion-item>Sprint Speed<span item-end>{{player.skills.sprintSpeed}}</span></ion-item>
+      </ion-list>
+    </ion-card>
+    <ion-card class="skill-card">
+      <ion-card-header>Shooting<span class="skill-score">{{mainSkillValues[1]}}</span></ion-card-header>
+      <ion-list>
+        <ion-item>Positioning<span item-end>{{player.skills.shotPositioning}}</span></ion-item>
+        <ion-item>Power<span item-end>{{player.skills.shotPower}}</span></ion-item>
+      </ion-list>
+    </ion-card>
     <button class="form-action-button" ion-button block type="submit" [disabled]="!updatePlayerForm.valid">Save</button>
   </form>
   <button class="form-action-button" ion-button block color="danger" (click)="deletePlayer()">Delete</button>
-
 </ion-content>

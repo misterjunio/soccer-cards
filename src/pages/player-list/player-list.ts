@@ -37,6 +37,7 @@ export class PlayerListPage {
       name: player.name,
       status: player.status,
       image: player.image,
+      skills: player.skills,
       id: id
     }
     this.navCtrl.push(PlayerDetailsPage, {

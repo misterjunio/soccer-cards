@@ -14,6 +14,7 @@ export class PlayerDetailsPage {
   image: any;
   player: any;
   loading: any;
+  mainSkillValues: Array<number>;
 
   constructor(
     private navParams: NavParams,
@@ -35,9 +36,12 @@ export class PlayerDetailsPage {
   getData() {
     this.player = this.navParams.get('data');
     this.image = this.player.image;
+    this.mainSkillValues = [
+      Math.round(this.player.skills.acceleration * 0.45 + this.player.skills.sprintSpeed * 0.55),
+      Math.round(this.player.skills.shotPositioning * 0.5 + this.player.skills.shotPower * 0.5)
+    ];
     this.updatePlayerForm = this.formBuilder.group({
-      name: new FormControl(this.player.name, Validators.required),
-      status: new FormControl(this.player.status, Validators.required)
+      name: new FormControl(this.player.name, Validators.required)
     });
   }
 
@@ -48,7 +52,7 @@ export class PlayerDetailsPage {
   updatePlayer(value) {
     let data = {
       name: value.name,
-      status: "Done",
+      status: "To do",
       image: this.image
     }
     this.firebaseService.updateFriend(this.player.id,data)
