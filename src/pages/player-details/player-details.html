@@ -27,21 +27,65 @@
       <ion-label floating color="primary">Name</ion-label>
       <ion-input type="text" formControlName="name" class="form-control" required></ion-input>
     </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validationMessages.name">
+        <div class="error-message" *ngIf="updatePlayerForm.get('name').hasError(validation.type) && (updatePlayerForm.get('name').dirty || updatePlayerForm.get('name').touched)">
+          {{validation.message}}
+        </div>
+      </ng-container>
+    </div>
     <ion-card class="skill-card">
       <ion-card-header>Pace<span class="skill-score">{{mainSkillValues[0]}}</span></ion-card-header>
       <ion-list>
-        <ion-item>Acceleration<span item-end>{{player.skills.acceleration}}</span></ion-item>
-        <ion-item>Sprint Speed<span item-end>{{player.skills.sprintSpeed}}</span></ion-item>
+        <ion-item>
+          <ion-label fixed>Acceleration</ion-label>
+          <ion-input type="number" formControlName="acceleration" class="form-control" text-center required [(ngModel)]='player.skills.acceleration' (input)='onChangePace()'></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>Sprint Speed</ion-label>
+          <ion-input type="number" formControlName="sprintSpeed" class="form-control" text-center required [(ngModel)]='player.skills.sprintSpeed' (input)='onChangePace()'></ion-input>
+        </ion-item>
       </ion-list>
     </ion-card>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validationMessages.pace.acceleration">
+        <div class="error-message" *ngIf="updatePlayerForm.get('acceleration').hasError(validation.type) && (updatePlayerForm.get('acceleration').dirty || updatePlayerForm.get('acceleration').touched)">
+          {{validation.message}}
+        </div>
+      </ng-container>
+      <ng-container *ngFor="let validation of validationMessages.pace.sprintSpeed">
+        <div class="error-message" *ngIf="updatePlayerForm.get('sprintSpeed').hasError(validation.type) && (updatePlayerForm.get('sprintSpeed').dirty || updatePlayerForm.get('sprintSpeed').touched)">
+          {{validation.message}}
+        </div>
+      </ng-container>
+    </div>
     <ion-card class="skill-card">
       <ion-card-header>Shooting<span class="skill-score">{{mainSkillValues[1]}}</span></ion-card-header>
       <ion-list>
-        <ion-item>Positioning<span item-end>{{player.skills.shotPositioning}}</span></ion-item>
-        <ion-item>Power<span item-end>{{player.skills.shotPower}}</span></ion-item>
+        <ion-item>
+          <ion-label fixed>Positioning</ion-label>
+          <ion-input type="number" formControlName="shotPositioning" class="form-control" text-center required [(ngModel)]='player.skills.shotPositioning' (input)='onChangeShooting()'></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>Power</ion-label>
+          <ion-input type="number" formControlName="shotPower" class="form-control" text-center required [(ngModel)]='player.skills.shotPower' (input)='onChangeShooting()'></ion-input>
+        </ion-item>
       </ion-list>
     </ion-card>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validationMessages.shooting.shotPositioning">
+        <div class="error-message" *ngIf="updatePlayerForm.get('shotPositioning').hasError(validation.type) && (updatePlayerForm.get('shotPositioning').dirty || updatePlayerForm.get('shotPositioning').touched)">
+          {{validation.message}}
+        </div>
+      </ng-container>
+      <ng-container *ngFor="let validation of validationMessages.shooting.shotPower">
+        <div class="error-message" *ngIf="updatePlayerForm.get('shotPower').hasError(validation.type) && (updatePlayerForm.get('shotPower').dirty || updatePlayerForm.get('shotPower').touched)">
+          {{validation.message}}
+        </div>
+      </ng-container>
+    </div>
     <button class="form-action-button" ion-button block type="submit" [disabled]="!updatePlayerForm.valid">Save</button>
+    <label class="error-message">{{errorMessage}}</label>
   </form>
   <button class="form-action-button" ion-button block color="danger" (click)="deletePlayer()">Delete</button>
 </ion-content>

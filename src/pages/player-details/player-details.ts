@@ -15,6 +15,36 @@ export class PlayerDetailsPage {
   player: any;
   loading: any;
   mainSkillValues: Array<number>;
+  errorMessage: string = '';
+  validationMessages = {
+    'name': [
+      { type: 'required', message: 'Name is required.' }
+    ],
+    'pace': {
+      'acceleration': [
+        { type: 'required', message: 'Acceleration is required.' },
+        { type: 'min', message: 'Values must be above 0.' },
+        { type: 'max', message: 'Values must be below 100.' }
+      ],
+      'sprintSpeed': [
+        { type: 'required', message: 'Sprint Speed is required.' },
+        { type: 'min', message: 'Values must be above 0.' },
+        { type: 'max', message: 'Values must be below 100.' }
+      ]
+    },
+    'shooting': {
+      'shotPositioning': [
+        { type: 'required', message: 'Positioning is required.' },
+        { type: 'min', message: 'Values must be above 0.' },
+        { type: 'max', message: 'Values must be below 100.' }
+      ],
+      'shotPower': [
+        { type: 'required', message: 'Power is required.' },
+        { type: 'min', message: 'Values must be above 0.' },
+        { type: 'max', message: 'Values must be below 100.' }
+      ]
+    }
+ };
 
   constructor(
     private navParams: NavParams,
@@ -35,13 +65,34 @@ export class PlayerDetailsPage {
 
   getData() {
     this.player = this.navParams.get('data');
+    console.log(this.player);
     this.image = this.player.image;
     this.mainSkillValues = [
       Math.round(this.player.skills.acceleration * 0.45 + this.player.skills.sprintSpeed * 0.55),
       Math.round(this.player.skills.shotPositioning * 0.5 + this.player.skills.shotPower * 0.5)
     ];
     this.updatePlayerForm = this.formBuilder.group({
-      name: new FormControl(this.player.name, Validators.required)
+      name: new FormControl(this.player.name, Validators.required),
+      acceleration: new FormControl(this.player.skills.acceleration, Validators.compose([
+        Validators.required,
+        Validators.min(0),
+        Validators.max(100)
+      ])),
+      sprintSpeed: new FormControl(this.player.skills.sprintSpeed, Validators.compose([
+        Validators.required,
+        Validators.min(0),
+        Validators.max(100)
+      ])),
+      shotPositioning: new FormControl(this.player.skills.shotPositioning, Validators.compose([
+        Validators.required,
+        Validators.min(0),
+        Validators.max(100)
+      ])),
+      shotPower: new FormControl(this.player.skills.shotPower, Validators.compose([
+        Validators.required,
+        Validators.min(0),
+        Validators.max(100)
+      ]))
     });
   }
 
@@ -50,15 +101,23 @@ export class PlayerDetailsPage {
   }
 
   updatePlayer(value) {
+    let skills = {
+      'acceleration': this.player.skills.acceleration,
+      'sprintSpeed': this.player.skills.sprintSpeed,
+      'shotPositioning': this.player.skills.shotPositioning,
+      'shotPower': this.player.skills.shotPower
+    };
     let data = {
       name: value.name,
-      status: "To do",
-      image: this.image
+      status: 'To do',
+      image: this.image,
+      skills: skills
     }
-    this.firebaseService.updateFriend(this.player.id,data)
-    .then(
-      res => {
+    this.firebaseService.updateFriend(this.player.id, data)
+    .then(res => {
         this.viewCtrl.dismiss();
+      }, err => {
+        this.errorMessage = err.message;
       }
     )
   }
@@ -66,7 +125,7 @@ export class PlayerDetailsPage {
   deletePlayer() {
     let confirm = this.alertCtrl.create({
       title: 'Confirm',
-      message: 'Do you want to delete ' + this.player.name + '?',
+      message: 'Do you really want to delete ' + this.player.name + '?',
       buttons: [
         {
           text: 'No',
@@ -116,7 +175,7 @@ export class PlayerDetailsPage {
     let randomId = Math.random().toString(36).substr(2, 5);
     console.log(randomId);
 
-    //uploads img to firebase storage
+    // uploads img to firebase storage
     this.firebaseService.uploadImage(image, randomId)
     .then(photoURL => {
       this.image = photoURL;
@@ -127,5 +186,13 @@ export class PlayerDetailsPage {
       });
       toast.present();
     })
+  }
+
+  onChangePace() {
+    this.mainSkillValues[0] = Math.round((this.player.skills.acceleration * 0.45 || 0) + (this.player.skills.sprintSpeed * 0.55 || 0));
+  }
+
+  onChangeShooting() {
+    this.mainSkillValues[1] = Math.round((this.player.skills.shotPositioning * 0.5 || 0) + (this.player.skills.shotPower * 0.5 || 0));
   }
 }

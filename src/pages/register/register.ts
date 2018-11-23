@@ -12,14 +12,14 @@ export class RegisterPage {
   errorMessage: string = '';
   successMessage: string = '';
   validationMessages = {
-   'email': [
-     { type: 'required', message: 'Email is required.' },
-     { type: 'pattern', message: 'Enter a valid email.' }
-   ],
-   'password': [
-     { type: 'required', message: 'Password is required.' },
-     { type: 'minlength', message: 'Password must be at least 6 characters long.' }
-   ]
+    'email': [
+      { type: 'required', message: 'Email is required.' },
+      { type: 'pattern', message: 'Enter a valid email.' }
+    ],
+    'password': [
+      { type: 'required', message: 'Password is required.' },
+      { type: 'minlength', message: 'Password must be at least 6 characters long.' }
+    ]
  };
 
   constructor(
@@ -35,8 +35,8 @@ export class RegisterPage {
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
       password: new FormControl('', Validators.compose([
-        Validators.minLength(6),
-        Validators.required
+        Validators.required,
+        Validators.minLength(6)
       ])),
     });
   }
@@ -44,14 +44,15 @@ export class RegisterPage {
   tryRegister(value) {
     this.authService.doRegister(value)
      .then(res => {
-       console.log(res);
-       this.errorMessage = "";
-       this.successMessage = "Your account has been created. Please log in.";
-     }, err => {
-       console.log(err);
-       this.errorMessage = err.message;
-       this.successMessage = "";
-     })
+          console.log(res);
+          this.errorMessage = "";
+          this.successMessage = "Your account has been created. Please log in.";
+        }, err => {
+          console.log(err);
+          this.errorMessage = err.message;
+          this.successMessage = "";
+        }
+      )
   }
 
   goLoginPage() {
