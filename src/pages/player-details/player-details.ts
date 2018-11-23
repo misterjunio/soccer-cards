@@ -114,6 +114,11 @@ export class PlayerDetailsPage {
     }
     this.firebaseService.updateFriend(this.player.id, data)
     .then(res => {
+      let toast = this.toastCtrl.create({
+        message: 'Player data was saved successfully',
+        duration: 2000
+      });
+      toast.present();
         this.viewCtrl.dismiss();
       }, err => {
         this.errorMessage = err.message;
@@ -135,7 +140,14 @@ export class PlayerDetailsPage {
           handler: () => {
             this.firebaseService.deleteFriend(this.player.id)
             .then(
-              res => this.viewCtrl.dismiss(),
+              res => {
+                let toast = this.toastCtrl.create({
+                  message: 'Player was deleted successfully',
+                  duration: 2000
+                });
+                toast.present();
+                this.viewCtrl.dismiss();
+              },
               err => console.log(err)
             )
           }
@@ -181,7 +193,7 @@ export class PlayerDetailsPage {
       this.loading.dismiss();
       let toast = this.toastCtrl.create({
         message: 'Image was updated successfully',
-        duration: 3000
+        duration: 2000
       });
       toast.present();
     })

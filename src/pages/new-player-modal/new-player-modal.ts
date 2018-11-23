@@ -111,6 +111,11 @@ export class NewPlayerModalPage {
     this.firebaseService.createFriend(data)
     .then(res => {
         this.resetFields();
+        let toast = this.toastCtrl.create({
+          message: 'Player was added successfully',
+          duration: 2000
+        });
+        toast.present();
         this.viewCtrl.dismiss();
       }, err => {
         this.errorMessage = err.message;
@@ -153,7 +158,7 @@ export class NewPlayerModalPage {
       this.loading.dismiss();
       let toast = this.toastCtrl.create({
         message: 'Image was updated successfully',
-        duration: 3000
+        duration: 2000
       });
       toast.present();
       })
