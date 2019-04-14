@@ -1,14 +1,13 @@
 page-player-details {
-	ion-card.skill-card ion-card-header {
-		color: map-get($colors, primary);
-	}
-	
-	ion-card-header span.skill-score {
-		float: right;
-	}
-    
-    .error-message
-    {
-     color: #bf3e3e;
-    }
+  ion-card.skill-card ion-card-header {
+    color: map-get($colors, primary);
+  }
+
+  ion-card-header span.skill-score {
+    float: right;
+  }
+
+  .error-message {
+    color: #bf3e3e;
+  }
 }

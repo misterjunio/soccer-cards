@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, MenuController, Nav } from 'ionic-angular';
+import { PlayerProfilePage } from '../player-profile/player-profile';
 import { PlayerListPage } from '../player-list/player-list';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
 
 @Component({
   selector: 'page-menu',
@@ -14,8 +14,8 @@ export class MenuPage {
   @ViewChild(Nav) nav: Nav;
 
   // make PlayerListPage the root (or first) page
-  rootPage = PlayerListPage;
-  pages: Array<{title: string, component: any}>;
+  rootPage = PlayerProfilePage;
+  pages: Array<{ title: string, component: any }>;
 
   constructor(
     public platform: Platform,
@@ -25,6 +25,7 @@ export class MenuPage {
   ) {
     // set our app's pages
     this.pages = [
+      { title: 'My Profile', component: PlayerProfilePage },
       { title: 'Player List', component: PlayerListPage }
     ];
   }

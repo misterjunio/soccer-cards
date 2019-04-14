@@ -7,12 +7,13 @@ import { SoccerCardsApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { MenuPage } from '../pages/menu/menu';
+import { PlayerProfilePage } from '../pages/player-profile/player-profile';
 import { PlayerListPage } from '../pages/player-list/player-list';
 import { PlayerDetailsPage } from '../pages/player-details/player-details';
 import { NewPlayerModalPage } from '../pages/new-player-modal/new-player-modal';
 
-import { FirebaseService } from '../pages/services/firebase.service';
-import { AuthService } from '../pages/services/auth.service';
+import { FirebaseService } from '../services/firebase.service';
+import { AuthService } from '../services/auth.service';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -30,6 +31,7 @@ import { environment } from '../environment/environment';
     LoginPage,
     RegisterPage,
     MenuPage,
+    PlayerProfilePage,
     PlayerListPage,
     PlayerDetailsPage,
     NewPlayerModalPage
@@ -48,6 +50,7 @@ import { environment } from '../environment/environment';
     LoginPage,
     RegisterPage,
     MenuPage,
+    PlayerProfilePage,
     PlayerListPage,
     PlayerDetailsPage,
     NewPlayerModalPage

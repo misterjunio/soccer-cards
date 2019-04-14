@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ViewController, normalizeURL, ToastController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { FirebaseService } from '../services/firebase.service';
+import { FirebaseService } from '../../services/firebase.service';
 import { ImagePicker } from '@ionic-native/image-picker';
 
 @Component({

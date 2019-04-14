@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
-import { AuthService } from '../services/auth.service';
-import { FirebaseService } from '../services/firebase.service';
+import { AuthService } from '../../services/auth.service';
+import { FirebaseService } from '../../services/firebase.service';
 import { NewPlayerModalPage } from '../new-player-modal/new-player-modal';
 import { PlayerDetailsPage } from '../player-details/player-details';
 import { LoginPage } from '../login/login';
@@ -32,7 +32,6 @@ export class PlayerListPage {
   }
 
   viewPlayerDetails(id, player) {
-    // debugger
     let data = {
       name: player.name,
       status: player.status,
