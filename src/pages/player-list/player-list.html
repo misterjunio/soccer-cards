@@ -17,14 +17,14 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let player of players"
-              (click)="viewPlayerDetails(player.payload.doc.id, player.payload.doc.data())">
+              (click)="viewPlayerDetails(player)">
       <ion-thumbnail item-start>
-        <img [src]="player.payload.doc.data().image">
+        <img [src]="player.image">
       </ion-thumbnail>
-      <h2>{{player.payload.doc.data().name}}</h2>
+      <h2>{{player.name}}</h2>
       <button ion-button
               clear
-              item-end>{{player.payload.doc.data().status}}</button>
+              item-end>{{player.status}}</button>
     </ion-item>
   </ion-list>
 </ion-content>

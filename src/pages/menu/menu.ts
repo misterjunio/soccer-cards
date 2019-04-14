@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, MenuController, Nav } from 'ionic-angular';
 import { PlayerProfilePage } from '../player-profile/player-profile';
 import { PlayerListPage } from '../player-list/player-list';
+import { GroupListPage } from '../group-list/group-list';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -26,7 +27,8 @@ export class MenuPage {
     // set our app's pages
     this.pages = [
       { title: 'My Profile', component: PlayerProfilePage },
-      { title: 'Player List', component: PlayerListPage }
+      { title: 'Friends List', component: PlayerListPage },
+      { title: 'Groups List', component: GroupListPage }
     ];
   }
 

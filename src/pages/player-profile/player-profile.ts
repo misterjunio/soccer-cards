@@ -51,7 +51,7 @@ export class PlayerProfilePage {
 
   getData() {
     const currentPlayer = this.authService.getCurrentPlayer();
-    this.firebaseService.getCurrentPlayer(currentPlayer.uid).subscribe(player => {
+    this.firebaseService.getPlayer(currentPlayer.uid).subscribe(player => {
       this.player = player;
       this.myProfileForm.controls['name'].setValue(this.player.name);
       this.myProfileForm.controls['email'].setValue(currentPlayer.email);
@@ -63,10 +63,12 @@ export class PlayerProfilePage {
   }
 
   updatePlayer(playerData) {
+    // TODO change this
     console.log(playerData);
   }
 
   openImagePicker() {
+    // TODO change this
     console.log(this.player);
   }
 }

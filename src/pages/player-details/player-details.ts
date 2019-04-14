@@ -64,7 +64,7 @@ export class PlayerDetailsPage {
   }
 
   getData() {
-    this.player = this.navParams.get('data');
+    this.player = this.navParams.get('player');
     this.image = this.player.image;
     this.mainSkillValues = [
       Math.round(this.player.skills.acceleration * 0.45 + this.player.skills.sprintSpeed * 0.55),
@@ -184,7 +184,6 @@ export class PlayerDetailsPage {
     this.loading.present();
     image = normalizeURL(image);
     let randomId = Math.random().toString(36).substr(2, 5);
-    console.log(randomId);
 
     // uploads img to firebase storage
     this.firebaseService.uploadImage(image, randomId)

@@ -11,6 +11,8 @@ import { PlayerProfilePage } from '../pages/player-profile/player-profile';
 import { PlayerListPage } from '../pages/player-list/player-list';
 import { PlayerDetailsPage } from '../pages/player-details/player-details';
 import { NewPlayerModalPage } from '../pages/new-player-modal/new-player-modal';
+import { GroupListPage } from '../pages/group-list/group-list';
+import { GroupDetailsPage } from '../pages/group-details/group-details';
 
 import { FirebaseService } from '../services/firebase.service';
 import { AuthService } from '../services/auth.service';
@@ -34,7 +36,9 @@ import { environment } from '../environment/environment';
     PlayerProfilePage,
     PlayerListPage,
     PlayerDetailsPage,
-    NewPlayerModalPage
+    NewPlayerModalPage,
+    GroupListPage,
+    GroupDetailsPage
   ],
   imports: [
     BrowserModule,
@@ -53,7 +57,9 @@ import { environment } from '../environment/environment';
     PlayerProfilePage,
     PlayerListPage,
     PlayerDetailsPage,
-    NewPlayerModalPage
+    NewPlayerModalPage,
+    GroupListPage,
+    GroupDetailsPage
   ],
   providers: [
     StatusBar,

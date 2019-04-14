@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import 'rxjs/add/operator/toPromise';
+import { map } from 'rxjs/operators';
 import { AngularFirestore } from 'angularfire2/firestore';
 import firebase from 'firebase/app';
 import 'firebase/storage';
@@ -25,18 +26,35 @@ export class FirebaseService {
     })
   }
 
-  getCurrentPlayer(playerId) {
+  getPlayer(playerId) {
     return this.afs.collection('users').doc(playerId).valueChanges();
   }
 
-  getFriends() {
-    return new Promise<any>((resolve, reject) => {
-      const currentUser = firebase.auth().currentUser;
-      this.snapshotChangesSubscription = this.afs.collection('people').doc(currentUser.uid).collection('friends', ref => ref.orderBy('name')).snapshotChanges()
-        .subscribe(snapshots => {
-          resolve(snapshots);
-        })
-    });
+  getCurrentPlayerGroups(playerId) {
+    return this.afs.collection('users').doc(playerId).collection('groups').snapshotChanges()
+      .pipe(map(groups => groups.map(group => {
+        const data = group.payload.doc.data();
+        const id = group.payload.doc.id;
+        return { id, ...data };
+      })));
+  }
+
+  getGroupFriends(playerId, groupId) {
+    return this.afs.collection('users').doc(playerId).collection('groups').doc(groupId).collection('friends').snapshotChanges()
+      .pipe(map(friends => friends.map(friend => {
+        const data = friend.payload.doc.data();
+        const id = friend.payload.doc.id;
+        return { id, ...data };
+      })));
+  }
+
+  getPlayerFriends(playerId) {
+    return this.afs.collection('people').doc(playerId).collection('friends', ref => ref.orderBy('name')).snapshotChanges()
+      .pipe(map(friends => friends.map(friend => {
+        const data = friend.payload.doc.data();
+        const id = friend.payload.doc.id;
+        return { id, ...data };
+      })));
   }
 
   unsubscribeOnLogOut() {

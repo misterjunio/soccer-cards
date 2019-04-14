@@ -18,30 +18,21 @@ export class PlayerListPage {
     private modalCtrl: ModalController,
     private authService: AuthService,
     private firebaseService: FirebaseService
-  ) {}
+  ) { }
 
   ionViewWillEnter() {
     this.getData();
   }
 
   getData() {
-    this.firebaseService.getFriends()
-    .then(players => {
-      this.players = players;
-    })
+    this.firebaseService.getPlayerFriends(this.authService.getCurrentPlayer().uid)
+      .subscribe(players => {
+        this.players = players;
+      })
   }
 
-  viewPlayerDetails(id, player) {
-    let data = {
-      name: player.name,
-      status: player.status,
-      image: player.image,
-      skills: player.skills,
-      id: id
-    }
-    this.navCtrl.push(PlayerDetailsPage, {
-      data: data
-    })
+  viewPlayerDetails(player) {
+    this.navCtrl.push(PlayerDetailsPage, { player });
   }
 
   openAddPlayerModal() {
@@ -54,8 +45,8 @@ export class PlayerListPage {
 
   logout() {
     this.authService.doLogout()
-    .then(res => {
-      this.navCtrl.push(LoginPage);
-    })
+      .then(res => {
+        this.navCtrl.push(LoginPage);
+      })
   }
 }
