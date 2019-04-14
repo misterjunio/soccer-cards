@@ -1,19 +1,16 @@
 page-login {
-  .error-message
-  {
-   color: #bf3e3e;
+  .error-message {
+    color: #bf3e3e;
   }
 
-  .go-to-register
-  {
+  .go-to-register {
     text-align: center;
     margin-top: 20px;
   }
 
-  .submit-btn
-  {
+  .submit-btn {
     border-radius: 6px;
-	  font-size: 1.6rem;
+    font-size: 1.6rem;
     font-weight: 500;
   }
 }

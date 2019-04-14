@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import 'rxjs/add/operator/toPromise';
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import { FirebaseService } from './firebase.service';
 
 @Injectable()
@@ -13,7 +13,10 @@ export class AuthService {
    return new Promise<any>((resolve, reject) => {
      firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
      .then(
-       res => resolve(res),
+       (res) => {
+         this.firebaseService.createUser(res.user.uid);
+         resolve(res)
+        },
        err => reject(err))
    })
   }
@@ -39,5 +42,9 @@ export class AuthService {
         });
       }
     })
+  }
+
+  getCurrentPlayer() {
+    return firebase.auth().currentUser;
   }
 }

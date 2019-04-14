@@ -1,0 +1,94 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <button ion-button
+            menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Player Profile</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <div *ngIf="player">
+    <ion-row no-padding>
+      <ion-col no-padding
+               col-2
+               offset-5>
+        <img [src]="player.image"
+             alt="Player Image" />
+      </ion-col>
+    </ion-row>
+    <ion-row no-padding
+             class="user-image-row">
+      <ion-col no-padding
+               width-60>
+        <button ion-button
+                outline
+                block
+                small
+                (click)="openImagePicker()">Change Picture</button>
+      </ion-col>
+    </ion-row>
+    <form [formGroup]="myProfileForm"
+          (ngSubmit)="updatePlayer(myProfileForm.value)">
+      <ion-item>
+        <ion-label floating
+                   color="primary">Name</ion-label>
+        <ion-input type="text"
+                   formControlName="name"
+                   class="form-control"
+                   required
+                   [disabled]='editDisabled'></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validationMessages.name">
+          <div class="error-message"
+               *ngIf="myProfileForm.get('name').hasError(validation.type) && (myProfileForm.get('name').dirty || myProfileForm.get('name').touched)">
+            {{validation.message}}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item>
+        <ion-label floating
+                   color="primary">Email</ion-label>
+        <ion-input type="email"
+                   formControlName="email"
+                   class="form-control"
+                   required
+                   [disabled]='editDisabled'></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validationMessages.email">
+          <div class="error-message"
+               *ngIf="myProfileForm.get('email').hasError(validation.type) && (myProfileForm.get('email').dirty || myProfileForm.get('email').touched)">
+            {{validation.message}}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item>
+        <ion-label floating
+                   color="primary">Password</ion-label>
+        <ion-input type="password"
+                   formControlName="password"
+                   class="form-control"
+                   required
+                   [disabled]='editDisabled'></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validationMessages.password">
+          <div class="error-message"
+               *ngIf="myProfileForm.get('password').hasError(validation.type) && (myProfileForm.get('password').dirty || myProfileForm.get('password').touched)">
+            {{validation.message}}
+          </div>
+        </ng-container>
+      </div>
+    </form>
+    <button ion-button
+            block
+            (click)="editForm()"
+            [hidden]="!editDisabled">Edit details</button>
+    <button ion-button
+            block
+            (click)="editForm()"
+            [hidden]="editDisabled">Save</button>
+  </div>
+</ion-content>
